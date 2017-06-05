@@ -9,11 +9,11 @@ How do we find out such k edges in a graph?
 
 There are many centrality definitions for a node.
 Under the common closeness centrality, [1] proves the centrality-aware link recommendation is NP-hard, and also provides a greedy algorithm whose expected approximation ratio is (1 - 1 / e).
-The approximation is guaranteed by proving the problem as a submodular function.
+The approximation ratio is guaranteed by proving the problem as a submodular function.
 
 Harmonic centrality is another centrality definition, which formulation is like closeness centrality.
 In 2014, I ever proved that the link recommendation greedy algorithm under harmonic centrality is also a submodular function.
-Hence if we use harmonic centrality instead of closeness centrality, then we obtain the same (1 - 1 / e) approximiation ratio.
+Hence if using harmonic centrality instead of closeness centrality in the greedy algorithm, then we are guarateed the same (1 - 1 / e) approximiation ratio.
 
 Maybe I am not the first one to prove the property of harmonic centrality, but my proof is uploaded here for future references.
 
