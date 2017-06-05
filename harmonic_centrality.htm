@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="robots" content="noindex">
+	<title>Harmonic centrality-aware link recommendation on unweighted graphs is a submodular function</title>
+	<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+	<style type = "text/css">
+		.proof_area{
+			background-color: lightgreen;
+		}
+		.property_area{
+			background-color: lightyellow;
+		}
+		.theorem_area{
+			background-color: lightblue;
+		}
+		.notation_area{
+			background-color: plum;
+		}
+	</style>
+</head>
+<body>
+	<h2>Harmonic centrality-aware link recommendation on unweighted graphs is a submodular function</h2>
+	<hr>
+	<p>
+		<h3>Harmonic Centrality</h3>
+		<a href = "http://toreopsahl.com/2010/03/20/closeness-centrality-in-networks-with-disconnected-components/">Reference</a><br>
+		Given a graph \( G = (V, E) \) and a node \( v \in V \), we have
+		\[
+			C_H(v) = \sum_{u \neq v} \frac{1}{d(v, u)}
+		\]
+		where \( u \in V \) and \( d(v, u) \) is the shortest distance between \( v \) and \( u \) on \( G \) .<br>
+		Although harmonic centrality shares the same centrality measurement (shortest distance) with closeness centralty, it provides more accurate measures on disconnected graphs.<br>
+		If there is no path between \( v \) and \( u \), then \( d(v, u) = \infty \) where \( \frac{1}{d(v, u)} = 0 \) .<br>
+	</p>
+	<hr>
+	<p>
+		<h3>Submodular Function</h3>
+		Let \( f(S) \) is a function of set \( S \) . \( f(S) \) is submodular if and only if
+		\[
+			f(S \cup \{ v \}) - f(S) \geq f(T \cup \{ v \}) - f(T)
+		\]
+		where \( S, T \) are two sets, \( S \subseteq T \subseteq \Omega \) and \( v \in \Omega - T \) .<br>
+		\( \Omega \) denotes the universal set.
+	</p>
+	<hr>
+	<p>
+		<h3>Harmonic Centrality in Terms of Neighbors</h3>
+		Since all shortest paths starting from node \( v \) should pass its neighbors,
+		harmonic centrality can be viewed as a function of neighbors of \( v \).
+		\[
+			C_H(N(v)) = \sum_{u \neq v} \frac{1}{1 + \min_{y \in N(v)} (d(y, u))}
+		\]
+		where \( N(v) \) is the set of neighbors of \( v \).<br>
+		We limit the graph \( G \) to be <b>unweighted</b>, or all edges have the same weight \( 1 \) or any other positive value.<br>
+		Without loss of generality, we assume that \( d(y, u) \) are <b>all different</b>.
+	</p>
+	<hr>
+	<p>
+		<h3>Proof</h3>
+		<h4>Claim 1</h4>
+		At first, we prove the following claim: For any node \( u \) on \( G \), we have
+		<div class = "theorem_area">
+		\[
+			\min_{y \in N(v)} d(y, u) - \min_{y \in N(v) \cup \{ x \}} d(y, u)
+			\geq \min_{y \in M(v)} d(y, u) - \min_{y \in M(v) \cup \{ x \}} d(y, u)
+		\]
+		</div>
+		where \( N(v), M(v) \) are two sets of neighbors of \( v \) and \( N(v) \subseteq M(v) \subseteq V - \{ v \}, x \in V - \{ v \} - M(v) \) . <br>
+		In other words, the marginal decrease in \( d(y, u) \) due to a new neighbor \( x \) is getting smaller and smaller as \( N(v) \) grows. <br>
+		To emphasize our importance in the following proof, the above minimums are denoted by a few notations without extra statements.
+		<h5>Notation</h5>
+		<div class = "notation_area">
+			\[
+				\begin{array}{rcl}
+					A &amp; = &amp; \min_{y \in N(v)} d(y, u) \\
+					B &amp; = &amp; \min_{y \in N(v) \cup \{ x \}} d(y, u) \\
+					C &amp; = &amp; \min_{y \in M(v)} d(y, u) \\
+					D &amp; = &amp; \min_{y \in M(v) \cup \{ x \}} d(y, u) \\
+					E &amp; = &amp; d(x, u)
+				\end{array}
+			\]
+		</div>
+		Hence the claim can be rewritten as
+		<div class = "theorem_area">
+		\[
+			A - B \geq C - D
+		\]
+		</div>
+		Before starting the proof, we show the implicit properties of this inequality.
+		<h5>Property</h5>
+		<div class = "property_area">
+			<ol>
+				<li>
+					\( A \geq B \) , and we have
+					\[
+						\left \{ \begin{array}{ll}
+							A &gt; B = E &amp; \text{ iff } A &gt; B \\
+							A = B &lt; E &amp; \text{ iff } A = B \\
+						\end{array} \right .
+					\]
+				</li>
+				<li>
+					\( C \geq D \) , and we have
+					\[
+						\left \{ \begin{array}{ll}
+							C &gt; D = E &amp; \text{ iff } C &gt; D \\
+							C = D &lt; E &amp; \text{ iff } C = D \\
+						\end{array} \right .
+					\]
+				</li>
+				<li>
+					\( A \geq C \because N(v) \subseteq M(v) \)
+				</li>
+				<li>
+					\( B \geq D \because N(v) \subseteq M(v) \)
+				</li>
+			</ol>	
+		</div>
+		<h5>Proof</h5>
+		<div class = "proof_area">
+			The proof consists of the following three cases.
+			<ol>
+				<li>
+					If \( A = B \) , then 
+					\[
+						C = D
+					\]
+					because
+					\[
+						E &gt; B \geq D \Rightarrow C = D
+					\]
+					Thus
+					\[
+						A - B = 0 \geq 0 = C - D
+					\]
+				</li>
+				<li>
+					If \( A &gt; B \) and \( C = D \) , then
+					\[
+						A - B \geq 0 = C - D
+					\]
+				</li>
+				<li>
+					If \( A &gt; B \) and \( C &gt; D \) , then
+					\[
+						B = E = D
+					\]
+					In addition
+					\[
+						A \geq C
+					\]
+					Thus
+					\[
+							A - B 
+							= A - E 
+							\geq C - E 
+							= C - D
+					\]
+				</li>
+			</ol>
+		</div>
+		
+		<h4>Claim 2</h4>
+		Since claim 1 holds, we natually have
+		<div class = "theorem_area">
+		\[
+			\begin{array}{rcl}
+				(1 + A) - (1 + B) &amp; \geq &amp; (1 + C) - (1 + D) \\
+				(1 + \min_{y \in N(v)} d(y, u)) - (1 + \min_{y \in N(v) \cup \{ x \}} d(y, u))
+					&amp; \geq &amp; (1 + \min_{y \in M(v)} d(y, u)) - (1 + \min_{y \in M(v) \cup \{ x \}} d(y, u))
+			\end{array}
+		\]
+		</div>
+
+		Thus we furthur claim the following inequality.
+		<div class = "theorem_area">
+		\[
+			\frac{1}{1 + B} - \frac{1}{1 + A} \geq \frac{1}{1 + D} - \frac{1}{1 + C}
+		\]
+		</div>
+		The proof of this chaim is like this of chaim 1.
+		<h5>Proof</h5>
+		<div class = "proof_area">
+			The proof consists of the following three cases.
+			<ol>
+				<li>
+					If \( A = B \) , then 
+					\[
+						C = D
+					\]
+					because
+					\[
+						E &gt; B \geq D \Rightarrow C = D
+					\]
+					Thus
+					\[
+						\frac{1}{1 + B} - \frac{1}{1 + A} = 0 \geq 0 = \frac{1}{1 + D} - \frac{1}{1 + C}
+					\]
+				</li>
+				<li>
+					If \( A &gt; B \) and \( C = D \) , then
+					\[
+						\frac{1}{1 + B} - \frac{1}{1 + A} \geq 0 = \frac{1}{1 + D} - \frac{1}{1 + C}
+					\]
+				</li>
+				<li>
+					If \( A &gt; B \) and \( C &gt; D \) , then
+					\[
+						B = E = D
+					\]
+					In addition
+					\[
+						A \geq C
+					\]
+					Thus
+					\[
+							\frac{1}{1 + B} - \frac{1}{1 + A} 
+							= \frac{1}{1 + E} - \frac{1}{1 + A} 
+							\geq \frac{1}{1 + E} - \frac{1}{1 + C} 
+							= \frac{1}{1 + D} - \frac{1}{1 + C}
+					\]
+				</li>
+			</ol>
+		</div>
+
+		<h4>Conclusion</h4>
+		Having chaim 2, we can write down
+		\[
+			\sum_{u \neq v} \frac{1}{1 + B} - \sum_{u \neq v} \frac{1}{1 + A} \geq \sum_{u \neq v} \frac{1}{1 + D} - \sum_{u \neq v} \frac{1}{1 + C}
+		\]
+		In other words, 
+		\[
+			\sum_{u \neq v} \frac{1}{1 + \min_{y \in N(v) \cup \{ x \}} d(y, u)}
+			- \sum_{u \neq v} \frac{1}{1 + \min_{y \in N(v)} d(y, u)}
+		\]
+		\[
+			\geq \sum_{u \neq v} \frac{1}{1 + \min_{y \in M(v) \cup \{ x \}} d(y, u)}
+			- \sum_{u \neq v} \frac{1}{1 + \min_{y \in M(v)} d(y, u)}
+		\]
+		for all nodes \( u \in V - \{ v \} \) . The above inequality is equivalent to
+		<div class = "theorem_area">
+		\[
+			C_H(N(v) \cup \{ x \}) - C_H(N(v))
+			\geq C_H(M(v) \cup \{ x \}) - C_H(M(v))
+		\]
+		</div>
+		where \( N(v) \subseteq M(v) \subseteq V - \{ v \}, x \in V - \{ v \} - M(v) \). <br>
+		That is, <b>harmonic centrality on unweighted graphs is a submodular function.</b>
+	</p>
+</body>
+</html>
