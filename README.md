@@ -17,7 +17,7 @@ If using harmonic centrality in the greedy algorithm, then we are also guarateed
 
 Maybe I am not the first one to prove the property of harmonic centrality, but my proof is uploaded here for future references.
 However, before directly using the greedy algorithm, we had better prove that it is NP-hard; otherwise, we are likely to discover an efficient P-time exact algorithm to solve the harmonic centrality-aware link recommendation.
-I did not prove NP-hard before, so the proof is left for readers.
+I did not prove NP-hard before, but believe that the proof is like what is presented in [1], so the proof is left for readers.
 
 ## References
 
