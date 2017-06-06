@@ -13,7 +13,7 @@ The approximation ratio is guaranteed by proving the problem as a submodular fun
 
 Harmonic centrality is another centrality definition, whose formulation is based on the shortest path distance between two nodes, like closeness centrality.
 In 2014, I proved that the link recommendation greedy algorithm under harmonic centrality is also a submodular function.
-If using harmonic centrality instead of closeness centrality in the greedy algorithm, then we are guarateed the same (1 - 1 / e) approximiation ratio.
+If using harmonic centrality in the greedy algorithm, then we are also guarateed the same (1 - 1 / e) approximiation ratio.
 
 Maybe I am not the first one to prove the property of harmonic centrality, but my proof is uploaded here for future references.
 
